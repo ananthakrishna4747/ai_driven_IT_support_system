@@ -235,6 +235,29 @@ The project is structured as follows:
   - `static/` - Static assets
   - `templates/` - HTML templates
   - `utils/` - Utility functions
+ 
+## Contributors
+
+This project was developed as part of the AIS National Competition 2025, where it won 2nd place. The research paper "SURAKSHA: AI-Driven IT Support and Automation" was published in the Information Systems Student Research Journal (ISSRJ).
+
+### Team Members
+
+- **Anantha Krishna Chilappagari** - [LinkedIn](https://www.linkedin.com/in/anantha-krishna-ch/) | University of North Texas
+- **Nagarjuna Pendekanti** - [LinkedIn](https://www.linkedin.com/in/pendekanti/) | University of North Texas
+- **Teja Babu Mandaloju** - [LinkedIn](https://www.linkedin.com/in/teja-mandaloju/) | University of North Texas
+- **Sakeet Kopparapu** - [LinkedIn](https://www.linkedin.com/in/kopparapu-sakeet/) | University of North Texas
+
+### Acknowledgments
+
+Special thanks to **Professor Sune Dueholm Müller** from the University of Oslo, Department of Informatics, for guidance and mentorship throughout this project.
+
+### Publication
+
+📄 **Read the paper:** [SURAKSHA: AI-Driven IT Support and Automation](https://www.issrj.org/wp-content/uploads/2025/12/SURAKSHA-AI-Driven-IT-Support-and-Automation.pdf)
+
+### Competition
+
+🏆 **2nd Place** - AIS National Competition 2025, University of Alabama
 
 ## License
 
