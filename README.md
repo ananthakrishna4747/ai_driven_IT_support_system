@@ -37,7 +37,7 @@ A second subsystem continuously tails operational logs, scores them with a light
 
 ## Tech
 
-![Tech flow](docs/flow.svg)
+![Tech flow](docs/flow.png)
 
 ### Example interaction *(illustrative — not a captured live session)*
 
