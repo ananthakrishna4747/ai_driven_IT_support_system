@@ -120,6 +120,16 @@ Built for the **AIS National Competition 2025** by:
 
 With guidance from **Professor Sune Dueholm Müller**, University of Oslo, Department of Informatics.
 
+## Roadmap
+
+Concrete next steps for hardening this from hackathon project to production-style service:
+
+- [ ] Docker Compose packaging for one-command local demo (MCP server + Flask UI + mock SolarWinds responses)
+- [ ] Kubernetes deployment manifests so the MCP server can scale horizontally under concurrent agent sessions
+- [ ] OAuth2 client-credentials flow for multi-tenant SolarWinds instances (currently single static API token)
+- [ ] Vector store (FAISS/Pinecone) over historical tickets for semantic "find similar past incidents" search
+- [ ] GitHub Actions CI running the existing Pytest suite on every PR
+
 ## License
 
 No license file is currently included in this repository — treat as personal/educational project code.
