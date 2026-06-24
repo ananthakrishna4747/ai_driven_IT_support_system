@@ -1,5 +1,7 @@
 # SURAKSHA — AI-Driven IT Support & Self-Healing Automation
 
+![SURAKSHA banner](docs/suraksha-banner.jpg)
+
 🏆 **2nd Place** — AIS National Competition 2025, University of Alabama
 📄 **Published** — *SURAKSHA: AI-Driven IT Support and Automation*, International Scientific Studies Research Journal (ISSRJ), 2025 ([read the paper](https://www.issrj.org/wp-content/uploads/2025/12/SURAKSHA-AI-Driven-IT-Support-and-Automation.pdf))
 
@@ -24,6 +26,10 @@ A second subsystem continuously tails operational logs, scores them with a light
 - **Web chatbot interface** (Flask) on top of the MCP server for non-technical users
 - **Self-healing engine** — TF-IDF + Random Forest anomaly scoring over synthetic and live log streams, automated remediation scripts, and periodic model retraining from outcomes
 - **Demo mode** with mock data, so the system can be evaluated without live SolarWinds credentials
+
+## Demo
+
+![SURAKSHA demo](docs/suraksha-demo.gif)
 
 ## User flow
 
