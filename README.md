@@ -1,264 +1,111 @@
-# SolarWinds Service Desk MCP Server
+# SURAKSHA — AI-Driven IT Support & Self-Healing Automation
 
-This Model Context Protocol (MCP) server allows integration with the SolarWinds Service Desk API (formerly Samanage API). It exposes API endpoints as resources and provides tools for interacting with various entities like incidents, problems, and users.
+🏆 **2nd Place** — AIS National Competition 2025, University of Alabama
+📄 **Published** — *SURAKSHA: AI-Driven IT Support and Automation*, International Scientific Studies Research Journal (ISSRJ), 2025 ([read the paper](https://www.issrj.org/wp-content/uploads/2025/12/SURAKSHA-AI-Driven-IT-Support-and-Automation.pdf))
 
-## Installation
+A conversational IT service-desk agent that lets support staff query and act on **SolarWinds Service Desk** (Samanage) data in plain English, paired with a self-healing layer that watches infrastructure logs, classifies incidents, and applies fixes automatically.
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/solarwinds-mcp-server.git
-   cd solarwinds-mcp-server
-   ```
+## What it does
 
-2. **Create and activate a virtual environment:**
-   ```bash
-   uv venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   ```
+Instead of clicking through ticketing-system menus, an analyst can ask *"Who attempted unauthorized access this week?"* or *"Create an incident for the failed VPN gateway"* and get a structured answer or action back in seconds. Under the hood, an **MCP server** wraps the SolarWinds REST API as a set of typed, schema-validated tools; a **Claude- and LangChain-powered agent** decides which tools to call and how to phrase the result.
 
-3. **Install the package:**
-   ```bash
-   uv pip install -e .
-   ```
+A second subsystem continuously tails operational logs, scores them with a lightweight ML model, and resolves recurring incidents on its own — learning from each validated fix.
 
-4. **Create a .env file with your API credentials:**
-   ```
-   SOLARWINDS_API_TOKEN=your_api_token_here
-   SOLARWINDS_API_URL=https://api.samanage.com
-   # For European based customers use: https://apieu.samanage.com
-   # For APJ based customers use: https://apiau.samanage.com
-   ANTHROPIC_API_KEY=your_anthropic_api_key_here  # Required for Claude features
-   ```
+### Conversational agent flow
+![Agent flow](docs/agent-flow.svg)
 
-## Usage
+### Self-healing loop
+![Self-healing loop](docs/self-healing-loop.svg)
 
-### Running the server
+## Key features
 
-You can run the MCP server directly:
-```bash
-uv run python -m src
+- **MCP tool layer** over the SolarWinds Service Desk (Samanage) API — incidents, problems, changes, users, departments, groups, roles, and the knowledge base, each exposed as a discrete, typed tool
+- **Claude-powered conversational client** that plans tool calls, maintains context, and supports prompt caching + batch processing for repeated queries
+- **Web chatbot interface** (Flask) on top of the MCP server for non-technical users
+- **Self-healing engine** — TF-IDF + Random Forest anomaly scoring over synthetic and live log streams, automated remediation scripts, and periodic model retraining from outcomes
+- **Demo mode** with mock data, so the system can be evaluated without live SolarWinds credentials
+
+## Tech stack
+
+`Python` · `Model Context Protocol (MCP)` · `Anthropic Claude API` · `LangChain` · `Flask` · `scikit-learn (Random Forest, TF-IDF)` · `SQLite` · `httpx`
+
+## Repository structure
+
+```
+ai_driven_IT_support_system/
+├── __main__.py                       # MCP server entry point (stdio transport)
+├── enhanced_self_healing_system.py   # Log monitor + anomaly model + auto-remediation
+├── solarwinds_mcp_server/
+│   ├── server.py                     # FastMCP server, tool/resource definitions
+│   ├── client.py                     # Direct API client
+│   ├── conversational_client.py      # Claude-driven conversational agent
+│   ├── app.py                        # Flask web chatbot
+│   ├── static/ · templates/          # Chatbot UI assets
+└── setup.py
 ```
 
-Or use the MCP CLI:
-```bash
-uv run mcp dev src
-```
-
-### Running the chatbot with web interface
-
-For a complete experience with a web interface, you can use the provided scripts:
-
-#### Method 1: Quick Start Script
+## Setup
 
 ```bash
-# Make the script executable (first time only)
-chmod +x start_server.sh
-
-# Run the server and web interface
-./start_server.sh
-```
-
-#### Method 2: Python Script
-
-```bash
-# Install dependencies first
+git clone https://github.com/ananthakrishna4747/ai_driven_IT_support_system.git
+cd ai_driven_IT_support_system
+uv venv && source .venv/bin/activate      # or: python -m venv .venv
 uv pip install -e .
-
-# Run the chatbot
-python run_chatbot.py
 ```
 
-This will:
-1. Start the MCP server in the background
-2. Start the Flask web interface
-3. Open a browser window to access the chatbot
+Create a `.env` with:
+```
+SOLARWINDS_API_TOKEN=your_api_token_here
+SOLARWINDS_API_URL=https://api.samanage.com
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+```
 
-You can customize the host and port:
+Run the MCP server directly:
+```bash
+uv run python -m solarwinds_mcp_server
+```
+
+Or launch the full chatbot experience (MCP server + Flask UI):
 ```bash
 python run_chatbot.py --host 0.0.0.0 --port 8080
 ```
 
-For debugging:
-```bash
-python run_chatbot.py --debug
-```
-
-### Using with Claude Desktop
-
-Create a config file at the appropriate location for your OS:
-
-- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
-
-Add the following configuration:
+To wire it into **Claude Desktop**, add to `claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
     "solarwinds": {
       "command": "uv",
-      "args": [
-        "--directory",
-        "/path/to/solarwinds-mcp-server",
-        "run",
-        "python",
-        "-m",
-        "src"
-      ],
-      "env": {
-        "SOLARWINDS_API_TOKEN": "your_api_token_here",
-        "SOLARWINDS_API_URL": "https://api.samanage.com"
-      }
+      "args": ["--directory", "/path/to/ai_driven_IT_support_system", "run", "python", "-m", "solarwinds_mcp_server"],
+      "env": { "SOLARWINDS_API_TOKEN": "your_api_token_here" }
     }
   }
 }
 ```
 
-Restart Claude Desktop.
+> No live token? The system runs in **demo mode** with simulated data when `SOLARWINDS_API_TOKEN` is left as the placeholder.
 
-## Testing the System
+## Available MCP tools
 
-### Testing the MCP server and tools
+| Category | Tools |
+|---|---|
+| Incidents | `create_incident`, `get_incident`, `update_incident`, `delete_incident`, `list_incidents`, `add_comment_to_incident` |
+| Problems | `create_problem`, `get_problem`, `update_problem`, `delete_problem`, `list_problems`, `link_incidents_to_problem` |
+| Changes | `create_change`, `get_change`, `update_change`, `delete_change`, `list_changes` |
+| Users & orgs | `get_user`, `get_user_by_email`, `list_users`, `create_department`, `get/update/delete/list_department` |
+| Knowledge base | `create_category` |
+| Claude integration | `cache_prompt`, `list_cached_prompts`, `use_cached_prompt`, `batch_process_messages`, `analyze_with_claude` |
 
-```bash
-# Test the MCP server tools
-python test_tools.py
-```
+## Team & acknowledgments
 
-### Testing the web interface utilities
+Built for the **AIS National Competition 2025** by:
+- **Anantha Krishna Chilappagari** — [LinkedIn](https://www.linkedin.com/in/anantha-krishna-ch/)
+- **Nagarjuna Pendekanti** — [LinkedIn](https://www.linkedin.com/in/pendekanti/)
+- **Teja Babu Mandaloju** — [LinkedIn](https://www.linkedin.com/in/teja-mandaloju/)
+- **Sakeet Kopparapu** — [LinkedIn](https://www.linkedin.com/in/kopparapu-sakeet/)
 
-```bash
-# Test the web interface components
-python test_web.py
-```
-
-## Troubleshooting
-
-### Server keeps terminating
-If the MCP server terminates unexpectedly, check the logs in:
-- `mcp_server.log` - For MCP server logs
-- `solarwinds_mcp_server.log` - For more detailed server logs
-- `solarwinds_client.log` - For client connection logs
-- `chatbot.log` - For overall system logs
-
-### API Authentication Issues
-If you see 406 Not Acceptable errors, check that:
-- Your API token is correctly set in the .env file
-- You're using the correct API URL for your region
-
-### Demo Mode
-When using the test_token value, the system runs in simulation mode with mock data.
-
-## Available Resources
-
-- `samanage://api` - List of all available API endpoints
-- `samanage://incidents` - List of all incidents
-- `samanage://incidents/{id}` - Details of a specific incident
-- `samanage://problems` - List of all problems
-- `samanage://problems/{id}` - Details of a specific problem
-- `samanage://changes` - List of all changes
-- `samanage://changes/{id}` - Details of a specific change
-- `samanage://users` - List of all users
-- `samanage://users/{id}` - Details of a specific user
-- `samanage://departments` - List of all departments
-- `samanage://departments/{id}` - Details of a specific department
-- `samanage://sites` - List of all sites
-- `samanage://sites/{id}` - Details of a specific site
-- `samanage://groups` - List of all groups
-- `samanage://groups/{id}` - Details of a specific group
-- `samanage://roles` - List of all roles
-- `samanage://roles/{id}` - Details of a specific role
-- `samanage://categories` - List of all categories
-- `samanage://categories/{id}` - Details of a specific category
-- `samanage://solutions` - List of all solutions
-- `samanage://solutions/{id}` - Details of a specific solution
-
-## Available Tools
-
-### Incident Management
-- `create_incident` - Create a new incident
-- `get_incident` - Get incident details
-- `update_incident` - Update an existing incident
-- `delete_incident` - Delete an incident
-- `list_incidents` - List incidents with various filters
-- `add_comment_to_incident` - Add a comment to an incident
-
-### Problem Management
-- `create_problem` - Create a new problem
-- `get_problem` - Get problem details
-- `update_problem` - Update an existing problem
-- `delete_problem` - Delete a problem
-- `list_problems` - List problems with various filters
-- `link_incidents_to_problem` - Link incidents to a problem
-
-### Change Management
-- `create_change` - Create a new change
-- `get_change` - Get change details
-- `update_change` - Update an existing change
-- `delete_change` - Delete a change
-- `list_changes` - List changes with various filters
-
-### User and Organization Management
-- `get_user` - Get user details
-- `get_user_by_email` - Find a user by email
-- `list_users` - List users with various filters
-- `create_department` - Create a new department
-- `get_department` - Get department details
-- `update_department` - Update an existing department
-- `delete_department` - Delete a department
-- `list_departments` - List departments with various filters
-
-### Knowledge Management
-- `create_category` - Create a new category
-
-### Claude Integration
-- `cache_prompt` - Cache a prompt with Claude API
-- `list_cached_prompts` - List all cached prompts
-- `use_cached_prompt` - Use a previously cached prompt
-- `delete_cached_prompt` - Delete a cached prompt
-- `batch_process_messages` - Process multiple messages in a batch
-- `analyze_with_claude` - Analyze data using Claude
-
-## Development
-
-The project is structured as follows:
-
-- `src/` - Core MCP server code
-  - `api_helpers.py` - Helper functions for the SolarWinds API
-  - `incident_tools.py` - Incident management functions
-  - `problem_tools.py` - Problem management functions
-  - `change_tools.py` - Change management functions
-  - `user_tools.py` - User management functions
-  - `organization_tools.py` - Department, site, group, role management
-  - `knowledge_tools.py` - Category and solution management
-- `flask_app/` - Web interface
-  - `app.py` - Flask application
-  - `static/` - Static assets
-  - `templates/` - HTML templates
-  - `utils/` - Utility functions
- 
-## Contributors
-
-This project was developed as part of the AIS National Competition 2025, where it won 2nd place. The research paper "SURAKSHA: AI-Driven IT Support and Automation" was published in the Information Systems Student Research Journal (ISSRJ).
-
-### Team Members
-
-- **Anantha Krishna Chilappagari** - [LinkedIn](https://www.linkedin.com/in/anantha-krishna-ch/) | University of North Texas
-- **Nagarjuna Pendekanti** - [LinkedIn](https://www.linkedin.com/in/pendekanti/) | University of North Texas
-- **Teja Babu Mandaloju** - [LinkedIn](https://www.linkedin.com/in/teja-mandaloju/) | University of North Texas
-- **Sakeet Kopparapu** - [LinkedIn](https://www.linkedin.com/in/kopparapu-sakeet/) | University of North Texas
-
-### Acknowledgments
-
-Special thanks to **Professor Sune Dueholm Müller** from the University of Oslo, Department of Informatics, for guidance and mentorship throughout this project.
-
-### Publication
-
-📄 **Read the paper:** [SURAKSHA: AI-Driven IT Support and Automation](https://www.issrj.org/wp-content/uploads/2025/12/SURAKSHA-AI-Driven-IT-Support-and-Automation.pdf)
-
-### Competition
-
-🏆 **2nd Place** - AIS National Competition 2025, University of Alabama
+With guidance from **Professor Sune Dueholm Müller**, University of Oslo, Department of Informatics.
 
 ## License
 
-[MIT License](LICENSE)
+No license file is currently included in this repository — treat as personal/educational project code.
