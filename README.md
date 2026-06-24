@@ -35,6 +35,10 @@ A second subsystem continuously tails operational logs, scores them with a light
 
 ![User flow](docs/userflow.svg)
 
+## Tech
+
+![Tech flow](docs/flow.svg)
+
 ### Example interaction *(illustrative — not a captured live session)*
 
 > **Analyst:** "Show me all unauthorized entry attempts to Server Room B this week, and create an incident for the most recent one."
