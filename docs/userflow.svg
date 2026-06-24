@@ -1,0 +1,36 @@
+<svg viewBox="0 0 760 616" xmlns="http://www.w3.org/2000/svg">
+<defs><pattern id="hx2" width="40" height="70" patternUnits="userSpaceOnUse"><path d="M20 0 L40 12 L40 35 L20 47 L0 35 L0 12 Z" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="1"/></pattern></defs>
+<rect width="760" height="616" fill="#0B1220"/>
+<rect width="760" height="616" fill="url(#hx2)"/>
+<text x="380.0" y="36" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="18" font-weight="600" fill="#E2EAF5">SURAKSHA — Example Query Flow</text>
+<line x1="56" y1="70" x2="56" y2="500" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+<circle cx="56" cy="70" r="17" fill="#0F1728" stroke="#4A9EFF" stroke-width="2"/>
+<text x="56" y="75" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#4A9EFF">1</text>
+<text x="96" y="62" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.05em" fill="#4A9EFF">ANALYST</text>
+<text x="96" y="80" font-family="Inter, sans-serif" font-size="13" fill="#E2EAF5">Asks: "Who attempted unauthorized access to Server Room B this</text>
+<text x="96" y="96" font-family="Inter, sans-serif" font-size="13" fill="#E2EAF5">week?"</text>
+<circle cx="56" cy="156" r="17" fill="#0F1728" stroke="#00FF88" stroke-width="2"/>
+<text x="56" y="161" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#00FF88">2</text>
+<text x="96" y="148" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.05em" fill="#00FF88">CLAUDE AGENT</text>
+<text x="96" y="166" font-family="Inter, sans-serif" font-size="13" fill="#E2EAF5">Parses intent, selects the matching MCP tool for access-history</text>
+<text x="96" y="182" font-family="Inter, sans-serif" font-size="13" fill="#E2EAF5">queries.</text>
+<circle cx="56" cy="242" r="17" fill="#0F1728" stroke="#9B7BFF" stroke-width="2"/>
+<text x="56" y="247" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#9B7BFF">3</text>
+<text x="96" y="234" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.05em" fill="#9B7BFF">MCP SERVER</text>
+<text x="96" y="252" font-family="Inter, sans-serif" font-size="13" fill="#E2EAF5">Calls the underlying SolarWinds Service Desk API / stored</text>
+<text x="96" y="268" font-family="Inter, sans-serif" font-size="13" fill="#E2EAF5">procedure.</text>
+<circle cx="56" cy="328" r="17" fill="#0F1728" stroke="#4A9EFF" stroke-width="2"/>
+<text x="56" y="333" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#4A9EFF">4</text>
+<text x="96" y="320" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.05em" fill="#4A9EFF">SOLARWINDS API</text>
+<text x="96" y="338" font-family="Inter, sans-serif" font-size="13" fill="#E2EAF5">Returns raw incident and access-log records.</text>
+<circle cx="56" cy="414" r="17" fill="#0F1728" stroke="#00FF88" stroke-width="2"/>
+<text x="56" y="419" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#00FF88">5</text>
+<text x="96" y="406" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.05em" fill="#00FF88">CLAUDE AGENT</text>
+<text x="96" y="424" font-family="Inter, sans-serif" font-size="13" fill="#E2EAF5">Formats results into a direct, natural-language answer.</text>
+<circle cx="56" cy="500" r="17" fill="#0F1728" stroke="#FFB547" stroke-width="2"/>
+<text x="56" y="505" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#FFB547">6</text>
+<text x="96" y="492" font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="0.05em" fill="#FFB547">ANALYST</text>
+<text x="96" y="510" font-family="Inter, sans-serif" font-size="13" fill="#E2EAF5">Gets the answer, can ask a follow-up or create an incident on</text>
+<text x="96" y="526" font-family="Inter, sans-serif" font-size="13" fill="#E2EAF5">the spot.</text>
+<rect x="0.5" y="0.5" width="759" height="615" rx="10" fill="none" stroke="rgba(255,255,255,0.12)"/>
+</svg>

@@ -25,6 +25,20 @@ A second subsystem continuously tails operational logs, scores them with a light
 - **Self-healing engine** — TF-IDF + Random Forest anomaly scoring over synthetic and live log streams, automated remediation scripts, and periodic model retraining from outcomes
 - **Demo mode** with mock data, so the system can be evaluated without live SolarWinds credentials
 
+## User flow
+
+![User flow](docs/userflow.svg)
+
+### Example interaction *(illustrative — not a captured live session)*
+
+> **Analyst:** "Show me all unauthorized entry attempts to Server Room B this week, and create an incident for the most recent one."
+>
+> **SURAKSHA:** "Found 3 unauthorized attempts: Tue 9:14 AM (badge #4471, denied), Thu 2:03 PM (badge #2290, denied), Fri 11:47 PM (badge unknown, denied). Created Incident #INC-10432 for the Friday 11:47 PM attempt — flagged high priority due to after-hours timing."
+
+## Real-world application
+
+This follows the same natural-language-ops pattern showing up across enterprise ITSM (e.g., ServiceNow's Virtual Agent, Microsoft Copilot for Service) — letting support staff query and act on ticketing/access data conversationally instead of navigating multi-step UIs. Applying that pattern directly to SolarWinds via MCP is what made it a strong fit for the AIS competition: it's a real protocol (MCP) solving a real enterprise integration problem, not just a chatbot wrapper.
+
 ## Tech stack
 
 `Python` · `Model Context Protocol (MCP)` · `Anthropic Claude API` · `LangChain` · `Flask` · `scikit-learn (Random Forest, TF-IDF)` · `SQLite` · `httpx`
