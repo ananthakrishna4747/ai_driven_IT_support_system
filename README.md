@@ -1,6 +1,6 @@
 # SURAKSHA — AI-Driven IT Support & Self-Healing Automation
 
-![SURAKSHA banner](docs/suraksha-banner.jpg)
+![SURAKSHA banner]!(docs/flow.png)
 
 🏆 **2nd Place** — AIS National Competition 2025, University of Alabama
 📄 **Published** — *SURAKSHA: AI-Driven IT Support and Automation*, International Scientific Studies Research Journal (ISSRJ), 2025 ([read the paper](https://www.issrj.org/wp-content/uploads/2025/12/SURAKSHA-AI-Driven-IT-Support-and-Automation.pdf))
@@ -35,8 +35,6 @@ A second subsystem continuously tails operational logs, scores them with a light
 
 ![User flow](docs/userflow.svg)
 
-## Tech
-![Tech flow](docs/flow.png)
 
 ### Example interaction *(illustrative — not a captured live session)*
 
