@@ -27,7 +27,7 @@ A second subsystem continuously tails operational logs, scores them with a light
 - **Self-healing engine** — TF-IDF + Random Forest anomaly scoring over synthetic and live log streams, automated remediation scripts, and periodic model retraining from outcomes
 - **Demo mode** with mock data, so the system can be evaluated without live SolarWinds credentials
 
-## Demo
+## Reference
 
 ![SURAKSHA demo](docs/suraksha-demo.gif)
 
